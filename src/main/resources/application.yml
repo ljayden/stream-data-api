@@ -6,28 +6,6 @@ server:
   port: 8080
 spring:
   profiles: local
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306?autoReconnect=true&useUnicode=true&characterEncoding=utf8&useSSL=false
-    username: root
-    password: pass
-    hikari:
-      max-lifetime: 25000
-
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: create-drop
-    properties:
-      hibernate:
-        format_sql: true
-        jdbc.lob.non_contextual_creation: true
-    database: mysql
-    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-  redis:
-    #    host: ruid-test.v3rhpd.0001.apn2.cache.amazonaws.com
-    host: localhost
-    port: 6379
-
   output:
     ansi:
       enabled: always
