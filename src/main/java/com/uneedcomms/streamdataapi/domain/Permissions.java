@@ -6,9 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
 @Getter @Setter
-@RedisHash("shop")
-public class Shop {
-
+@RedisHash("permissions")
+public class Permissions {
     @Id
     private String key;
     private String appId;

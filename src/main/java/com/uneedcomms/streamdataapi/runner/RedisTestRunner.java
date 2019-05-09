@@ -1,40 +1,51 @@
 package com.uneedcomms.streamdataapi.runner;
 
-import com.uneedcomms.streamdataapi.domain.Shop;
-import com.uneedcomms.streamdataapi.repository.ShopRepository;
+import com.uneedcomms.streamdataapi.domain.Permissions;
+import com.uneedcomms.streamdataapi.repository.PermissionsRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class RedisTestRunner implements ApplicationRunner {
 
-    private ShopRepository shopRepository;
+    private PermissionsRepository permissionsRepository;
 
-    public RedisTestRunner(ShopRepository shopRepository) {
-        this.shopRepository = shopRepository;
+    public RedisTestRunner(PermissionsRepository permissionsRepository) {
+        this.permissionsRepository = permissionsRepository;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Shop shop = new Shop();
-        shop.setKey("1234-567890-abcd");
-        shop.setAppId("uneedcomms");
-        shop.setStatus("active");
-        Shop savedShop = shopRepository.save(shop);
-        System.out.println(savedShop);
+        Permissions permissions = new Permissions();
+        permissions.setKey("b8de2234-085c-43f5-b1ea-31d685dcafa1");
+        permissions.setAppId("uneedcomms");
+        permissions.setStatus("active");
+        Permissions savedPermissions01 = permissionsRepository.save(permissions);
+        permissions.setKey("8122f28a-1481-4471-a1a4-a7fddbc30ac1");
+        permissions.setStatus("inactive");
+        Permissions savedPermissions02 = permissionsRepository.save(permissions);
 
-        int size = 0;
-        Iterable<Shop> shops = shopRepository.findAll();
-        for (Shop s: shops) {
-            size++;
-            System.out.println(s.getAppId()+", "+s.getKey()+", "+s.getStatus());
+        System.out.println(savedPermissions01);
+        System.out.println(savedPermissions02);
+
+        String key = "b8de2234-085c-43f5-b1ea-31d685dcafa1";
+//        Permissions findedPermissions = permissionsRepository.findByKey(key);
+        Optional<Permissions> findedPermissions = permissionsRepository.findById(key);
+
+        String status = "";
+        if(findedPermissions.isPresent()){
+          status = findedPermissions.get().getStatus();
+        } else {
+            status = "no one match";
         }
-        System.out.println(size);
 
-        shops.forEach(s -> {
-            System.out.println(s.getAppId()+", "+s.getKey()+", "+s.getStatus());
-        });
-
+        System.out.println("===");
+        System.out.println(findedPermissions.get().getKey());
+        System.out.println(findedPermissions.get().getAppId());
+        System.out.println(findedPermissions.get().getStatus());
+        System.out.println("===");
     }
 }
