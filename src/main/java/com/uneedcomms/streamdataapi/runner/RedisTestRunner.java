@@ -28,7 +28,7 @@ public class RedisTestRunner implements ApplicationRunner {
         permissions.setStatus("inactive");
         Permissions savedPermissions02 = permissionsRepository.save(permissions);
         permissions.setKey("1234-1234-1234");
-        permissions.setStatus("inactive");
+        permissions.setStatus("active");
         Permissions savedPermissions03 = permissionsRepository.save(permissions);
 
         System.out.println(savedPermissions01);

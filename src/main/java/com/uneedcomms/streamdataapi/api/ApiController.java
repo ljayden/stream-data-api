@@ -1,5 +1,6 @@
-package com.uneedcomms.streamdataapi.events;
+package com.uneedcomms.streamdataapi.api;
 
+import com.uneedcomms.streamdataapi.api.request.StreamDto;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping(value = "/api/event")
-public class EventController {
+@RequestMapping(value = "/api/stream")
+public class ApiController {
 
     @GetMapping(produces = MediaTypes.HAL_JSON_UTF8_VALUE)
-    public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
+    public ResponseEntity createEvent(@RequestBody @Valid StreamDto streamDto, Errors errors) {
         return null;
     }
 
